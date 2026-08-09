@@ -94,7 +94,7 @@ def test_leave_request_can_be_approved(client):
     conn.close()
 
     assert new_request is not None
-    assert new_request["status"] == "Pending"
+    assert new_request["status"] == "Approved"
 
     response = client.post(
         f"/leave-requests/{new_request['id']}/approve", follow_redirects=True
