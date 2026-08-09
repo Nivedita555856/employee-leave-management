@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Apply for Leave - Employee Leave Portal{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('leave_requests') }}" class="btn btn-link ps-0 mb-3 text-decoration-none">&larr; Back to Leave Requests</a>
+
+<h2 class="mb-4">Apply for Leave</h2>
+
+<div class="card shadow-sm border-0" style="max-width: 520px;">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('apply_leave') }}" id="applyLeaveForm">
+            <div class="mb-3">
+                <label for="employee_id" class="form-label">Employee</label>
+                <select class="form-select" id="employee_id" name="employee_id" required>
+                    <option value="" disabled selected>Select an employee</option>
+                    {% for employee in employees %}
+                    <option value="{{ employee.id }}">{{ employee.name }} ({{ employee.department }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="leave_type" class="form-label">Leave Type</label>
+                <select class="form-select" id="leave_type" name="leave_type" required>
+                    <option value="" disabled selected>Select leave type</option>
+                    {% for leave_type in leave_types %}
+                    <option value="{{ leave_type }}">{{ leave_type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="from_date" class="form-label">From Date</label>
+                    <input type="date" class="form-control" id="from_date" name="from_date" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="to_date" class="form-label">To Date</label>
+                    <input type="date" class="form-control" id="to_date" name="to_date" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="reason" class="form-label">Reason</label>
+                <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

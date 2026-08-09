@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Employees - Employee Leave Portal{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Employees</h2>
+    <a href="{{ url_for('add_employee') }}" class="btn btn-primary">+ Add Employee</a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Leave Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.department }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td><span class="badge bg-secondary">{{ employee.leave_balance }} days</span></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-muted text-center py-3">No employees yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Add Employee - Employee Leave Portal{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('employees') }}" class="btn btn-link ps-0 mb-3 text-decoration-none">&larr; Back to Employees</a>
+
+<h2 class="mb-4">Add Employee</h2>
+
+<div class="card shadow-sm border-0" style="max-width: 480px;">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('add_employee') }}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Employee Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" id="department" name="department" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="leave_balance" class="form-label">Leave Balance (days)</label>
+                <input type="number" min="0" class="form-control" id="leave_balance" name="leave_balance" value="20" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Add Employee</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

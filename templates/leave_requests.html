@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Leave Requests - Employee Leave Portal{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Leave Requests</h2>
+    <a href="{{ url_for('apply_leave') }}" class="btn btn-primary">+ Apply for Leave</a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Employee</th>
+                    <th>Leave Type</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ req.employee_name }}</td>
+                    <td>{{ req.leave_type }}</td>
+                    <td>{{ req.from_date }}</td>
+                    <td>{{ req.to_date }}</td>
+                    <td>{{ req.reason }}</td>
+                    <td>
+                        <span class="badge status-badge status-{{ req.status|lower }}">{{ req.status }}</span>
+                    </td>
+                    <td class="text-nowrap">
+                        {% if req.status == "Pending" %}
+                        <form method="POST" action="{{ url_for('approve_leave', request_id=req.id) }}" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                        </form>
+                        <form method="POST" action="{{ url_for('reject_leave', request_id=req.id) }}" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Reject</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-muted text-center py-3">No leave requests yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+/* Employee Leave Management Portal - custom styling on top of Bootstrap 5 */
+
+body {
+    background-color: #f4f6f9;
+}
+
+.leave-navbar {
+    background-color: #1f3d3a;
+}
+
+.stat-card {
+    border-left: 4px solid #1f3d3a;
+}
+
+.nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #ffffff;
+}
+
+.table thead th {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+}
+
+.status-badge {
+    font-size: 0.8rem;
+    padding: 0.4em 0.7em;
+}
+
+.status-pending {
+    background-color: #f0ad4e;
+    color: #212529;
+}
+
+.status-approved {
+    background-color: #2f9e44;
+    color: #ffffff;
+}
+
+.status-rejected {
+    background-color: #d9534f;
+    color: #ffffff;
+}

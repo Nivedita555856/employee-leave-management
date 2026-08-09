@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Employee Leave Portal{% endblock %}
+
+{% block content %}
+<h2 class="mb-1">Dashboard</h2>
+<p class="text-muted mb-4">A quick snapshot of employees and leave activity.</p>
+
+<div class="row g-4">
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm border-0 stat-card h-100">
+            <div class="card-body">
+                <div class="text-muted small text-uppercase">Total Employees</div>
+                <div class="display-6 fw-bold">{{ total_employees }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm border-0 stat-card h-100">
+            <div class="card-body">
+                <div class="text-muted small text-uppercase">Total Leave Requests</div>
+                <div class="display-6 fw-bold">{{ total_requests }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm border-0 stat-card h-100">
+            <div class="card-body">
+                <div class="text-muted small text-uppercase">Pending Requests</div>
+                <div class="display-6 fw-bold text-warning">{{ pending_requests }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card shadow-sm border-0 stat-card h-100">
+            <div class="card-body">
+                <div class="text-muted small text-uppercase">Approved Requests</div>
+                <div class="display-6 fw-bold text-success">{{ approved_requests }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <h5 class="mb-3">Recent Leave Requests</h5>
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Employee</th>
+                        <th>Leave Type</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for req in recent_requests %}
+                    <tr>
+                        <td>{{ req.employee_name }}</td>
+                        <td>{{ req.leave_type }}</td>
+                        <td>{{ req.from_date }}</td>
+                        <td>{{ req.to_date }}</td>
+                        <td>
+                            <span class="badge status-badge status-{{ req.status|lower }}">{{ req.status }}</span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-muted text-center py-3">No leave requests yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="{{ url_for('employees') }}" class="btn btn-outline-primary me-2">View Employees</a>
+    <a href="{{ url_for('leave_requests') }}" class="btn btn-primary">View Leave Requests</a>
+</div>
+{% endblock %}
