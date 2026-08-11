@@ -76,7 +76,7 @@ def init_db():
     employee_count = conn.execute("SELECT COUNT(*) FROM employees").fetchone()[0]
     if employee_count == 0:
         starter_employees = [
-            ("Aditi Sharma", "Engineering", "aditi.sharma@company.com", 18),
+            ("Aditi Sharma.", "Engineering", "aditi.sharma@company.com", 18),
             ("Rohan Verma", "Sales", "rohan.verma@company.com", 20),
             ("Priya Nair", "Human Resources", "priya.nair@company.com", 15),
             ("Karan Mehta", "Finance", "karan.mehta@company.com", 22),
